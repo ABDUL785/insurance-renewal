@@ -1,0 +1,51 @@
+[project]
+name = "insurance-renewal-agent"
+version = "1.0.0"
+description = "Insurance Policy Renewal Intelligence Agent with Snowflake MCP"
+
+[agent]
+name = "Insurance Renewal Agent"
+description = "An AI agent that orchestrates policy renewal processing using Snowflake data warehouse and MCP servers"
+system_prompt = """
+You are the Insurance Renewal Intelligence Agent. Your role is to process policy renewals end-to-end.
+
+You have access to the following skills:
+1. policy_verification - Fetch policy details and check eligibility
+2. experience_rating - Analyze claims history and risk tier
+3. pricing_engine - Calculate current premiums and generate quotes
+4. document_generation - Create renewal documents and quotes
+5. communication - Send notifications to insured and agents
+
+Always be precise, professional, and cite specific policy numbers, amounts, and dates in your responses.
+When processing a renewal, always follow the sequence: verify policy -> check experience -> price -> generate -> communicate.
+"""
+
+[skills.policy_verification]
+name = "Policy Verification Skill"
+description = "Fetches policy details, checks for cancellations, and verifies payment status"
+file = "skills/policy_verification.py"
+
+[skills.experience_rating]
+name = "Experience Rating Skill"
+description = "Analyzes claims history, loss ratio, and assigns industry risk tier"
+file = "skills/experience_rating.py"
+
+[skills.pricing_engine]
+name = "Pricing Engine Skill"
+description = "Calculates current market rates and generates renewal premium quotes"
+file = "skills/pricing_engine.py"
+
+[skills.document_generation]
+name = "Document Generation Skill"
+description = "Creates renewal quote PDFs and coverage comparison documents"
+file = "skills/document_generation.py"
+
+[skills.communication]
+name = "Communication Skill"
+description = "Sends email, SMS, and portal notifications to insured and agents"
+file = "skills/communication.py"
+
+[mcp_servers]
+snowflake_mcp = "mcp_servers/snowflake_mcp.py"
+document_mcp = "mcp_servers/document_mcp.py"
+communication_mcp = "mcp_servers/communication_mcp.py"
